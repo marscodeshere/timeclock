@@ -1,40 +1,38 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { BrowserRouter as Router, Route, Routes, NavLink} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import './App.css';
+import Home from './Home.tsx';
 
-const client = generateClient<Schema>();
+export default function App() {
 
-function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
+  const {user, signOut} = useAuthenticator();
   return (
     <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
+        <Router>
+          <Nav variant="tabs" className="bg-body-tertiary">
+            <Nav.Item>
+              <NavLink to="/" className="nav-link">AIS</NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <Button onClick={signOut} id="signOutButton">Sign out</Button>
+            </Nav.Item>
+
+          </Nav>
+          <Navbar.Text className="justify-content-end">Signed In as: {user?.signInDetails?.loginId?.split("@")[0]}</Navbar.Text>
+          
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+
+        </Router>
+
+      {/* Footer */}
+      <footer className="mt-4 text-muted">
+        <p>&copy; {new Date().getFullYear()} AIS. All rights reserved.</p>
+      </footer>
     </main>
   );
 }
-
-export default App;
