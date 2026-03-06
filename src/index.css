@@ -14,6 +14,10 @@ code {
     monospace;
 }
 
-.amplify-authenticator {
-  background-color: black;
+.amplify-button--primary {
+  background: linear-gradient(
+    to right,
+    var(--amplify-colors-green-80),
+    var(--amplify-colors-orange-40)
+  );
 }
