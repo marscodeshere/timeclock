@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./assets/stockfall2.png");
   background-size: 100%;
 }
 
@@ -20,4 +19,26 @@ code {
     var(--amplify-colors-green-80),
     var(--amplify-colors-orange-40)
   );
+}
+
+.amplify-button--small {
+    background-color: var(--amplify-colors-green-80);
+}
+
+.amplify-tabs {
+    background-color: var(--amplify-colors-green-20);
+    margin-top: 10%;
+}
+
+.amplify-tabs__item--active {
+    color: var(--amplify-colors-green-80);
+    border-color:var(--amplify-colors-green-80);
+}
+
+.amplify-tabs__item {
+    color: var(--amplify-colors-black)
+}
+
+.amplify-label {
+    color: var(--amplify-colors-black)
 }
