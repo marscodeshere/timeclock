@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes, NavLink} from 'react-router-dom
 import Button from 'react-bootstrap/Button';
 import './App.css';
 import Home from './Home.tsx';
+import Clock from './Clock.tsx';
+import Times from './Times.tsx';
 
 export default function App() {
 
@@ -12,10 +14,16 @@ export default function App() {
   return (
     <main>
         <Router>
-          <Nav variant="tabs" className="bg-body-tertiary justify-content-center">
+          <Nav className="bg-body-tertiary justify-content-center">
             <Nav.Item>
               <NavLink to="/" className="nav-link">AIS</NavLink>
             </Nav.Item>
+            <Nav.Item>
+              <NavLink to="/clock" className="nav-link">Clock In / Out</NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink to="/times" className="nav-link">Times</NavLink>
+            </Nav.Item>             
             <Nav.Item>
               <Button onClick={signOut} id="signOutButton">Sign out</Button>
             </Nav.Item>
@@ -25,6 +33,8 @@ export default function App() {
           
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/clock" element={user?.signInDetails?.loginId?.includes("@aplg8.net") ? <Clock /> : <Home />} />
+            <Route path="/times" element={user?.signInDetails?.loginId?.includes("@aplg8.net") ? <Times /> : <Home />} />
           </Routes>
 
         </Router>
