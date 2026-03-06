@@ -12,7 +12,7 @@ export default function App() {
   return (
     <main>
         <Router>
-          <Nav variant="tabs" className="bg-body-tertiary">
+          <Nav variant="tabs" className="bg-body-tertiary justify-content-center">
             <Nav.Item>
               <NavLink to="/" className="nav-link">AIS</NavLink>
             </Nav.Item>
